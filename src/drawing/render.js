@@ -24,6 +24,8 @@ export default async function render(options) {
   const svgElement = svg.create(options);
   console.time((timer = 'svg render'));
   let svgContent = '';
+  svgContent += `\n\n\n<!-- ${window.location.href} -->\n\n\n`;
+  svgContent += `<rect x="0" y="0" width="${width}" height="${height}" fill="black" />`;
 
   function getRandomProperty(obj) {
     const keys = Object.keys(obj);
@@ -81,17 +83,6 @@ export default async function render(options) {
     }
   }
 
-  svgContent += svg.path(
-    [
-      { x: 0, y: 0 },
-      { x: width, y: 0 },
-      { x: width, y: height },
-      { x: 0, y: height },
-    ],
-    true,
-    { fill: 'black' }
-  );
-
   const colorGroups = {};
 
   // data.lines.forEach((line) => {
@@ -136,10 +127,18 @@ export default async function render(options) {
     );
   });
 
+  const stroke = 6;
+  const strokeHalf = stroke / 2;
+  const helper = 50;
+
+  colorGroups[Object.keys(colorGroups)[0]].push(
+    `<path d="M ${width + strokeHalf} ${height + helper + strokeHalf} v -${helper} h ${helper}" fill="none" />`
+  );
+
   Object.keys(colorGroups).forEach((color) => {
     svgContent += `<g 
       id="${colorGroups[color].id}"
-      stroke-width="1mm" 
+      stroke-width="${stroke}" 
       stroke-linecap="round" 
       stroke-linejoin="round" 
       stroke="${color}"

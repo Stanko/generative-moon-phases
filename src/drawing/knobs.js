@@ -14,7 +14,7 @@ const KNOBS = [
     min: 500,
     step: 50,
     max: 4000,
-    default: 600,
+    default: 1450,
   },
   {
     name: 'moonPhase',

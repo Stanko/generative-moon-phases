@@ -31,7 +31,7 @@ button::-moz-focus-inner {
 canvas {
   display: block;
   box-shadow: 0 0 5px #ddd;
-  background: $black;
+  // background: $black;
   max-width: 100% !important;
   max-height: calc(100vh - 120px) !important;
   margin-bottom: 10px;
